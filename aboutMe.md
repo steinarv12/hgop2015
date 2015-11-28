@@ -3,14 +3,17 @@ Nafn: Steinar Eyþór Valsson
 
 Ólst upp á Akureyri
 
-
 ## Nám
-Náttúrufræðibraut MA
-Rétt að klára BS í tölvunarfræði
+* Náttúrufræðibraut MA
+* Rétt að klára BS í tölvunarfræði
 
 ## Atvinna
-Sumarvinna hjá Marel
-starfsnám hjá Fraunhofer í College Park, MD, U.S
-Er í 100% starfi hjá Símanum
+* Sumarvinna hjá Marel
+* Starfsnám hjá Fraunhofer í College Park, MD, U.S
+* Er í 100% starfi hjá Símanum
 
+## Eitthvað óvænt
+* ?
 
+## Hvernig forritari er ég
+* Góð spurning, vissi ekki að það væru skilgreindar tegundir.
