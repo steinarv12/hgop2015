@@ -47,6 +47,16 @@ module.exports = function(config) {
       stripPrefix: 'client/'
     },
 
+    reporters: ['progress', 'junit'],
+
+    // Reporters
+    junitReporter: {
+      outputDir: 'reports',
+      outputFile: undefined,
+      suite: '',
+      useBrowserName: true
+    }
+
     // list of files / patterns to exclude
     exclude: [],
 
