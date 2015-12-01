@@ -62,9 +62,11 @@ NextState (error - not x's turn)
 
 ## Board for reference
 
+```
  y
 2| o,  x,  o
 1| x,  o,  x
 0| x,  o,  x
 ------------ x
    0   1   2
+```
