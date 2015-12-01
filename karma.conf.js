@@ -55,7 +55,7 @@ module.exports = function(config) {
       outputFile: undefined,
       suite: '',
       useBrowserName: true
-    }
+    },
 
     // list of files / patterns to exclude
     exclude: [],
