@@ -8,14 +8,14 @@ describe('create game command', function(){
     when={
       id:"1234",
       comm:"CreateGame",
-      userName : "Gulli",
+      userName : "Steinar",
       name:"TheFirstGame",
       timeStamp: "2015.12.02T11:29:44"
     };
     then=[{
       id:"1234",
       event:"GameCreated",
-      userName: "Gulli",
+      userName: "Steinar",
       timeStamp: "2015.12.02T11:29:44"
     }];
 
@@ -29,14 +29,14 @@ describe('create game command', function(){
     when={
       id:"12347",
       comm:"CreateGame",
-      userName : "Halli",
+      userName : "Gunni",
       name:"TheFirstGame",
       timeStamp: "2015.12.02T10:29:44"
     };
     then=[{
       id:"12347",
       event:"GameCreated",
-      userName: "Halli",
+      userName: "Gunni",
       timeStamp: "2015.12.02T10:29:44"
     }];
 
@@ -55,21 +55,21 @@ describe('join game command', function(){
     given= [{
       id:"1234",
       event:"GameCreated",
-      userName: "Gulli",
+      userName: "Steinar",
       timeStamp: "2015.12.02T11:29:44"
     }];
     when={
       id:"12345",
       comm:"JoinGame",
-      userName : "Halli",
+      userName : "Gunni",
       name:"TheFirstGame",
       timeStamp: "2015.12.02T11:30:50"
     };
     then=[{
       id:"12345",
       event:"GameJoined",
-      userName: "Halli",
-      otherUserName: "Gulli",
+      userName: "Gunni",
+      otherUserName: "Steinar",
       timeStamp: "2015.12.02T11:30:50"
     }];
 
@@ -83,14 +83,14 @@ describe('join game command', function(){
     when={
       id:"12345",
       comm:"JoinGame",
-      userName : "Halli",
+      userName : "Gunni",
       name:"TheFirstGame",
       timeStamp: "2015.12.02T11:30:55"
     };
     then=[{
       id:"12345",
       event:"GameDoesNotExist",
-      userName: "Halli",
+      userName: "Gunni",
       timeStamp: "2015.12.02T11:30:55"
     }];
 
