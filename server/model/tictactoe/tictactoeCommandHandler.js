@@ -1,6 +1,10 @@
 module.exports = function tictactoeCommandHandler(events) {
   var gameCreatedEvent = events[0];
 
+  var boardState = [['','',''],
+		    ['','',''],
+		    ['','','']];
+
   var handlers = {
     "CreateGame": function (cmd) {
       {
@@ -30,7 +34,14 @@ module.exports = function tictactoeCommandHandler(events) {
           timeStamp: cmd.timeStamp
         }];
       }
-    }
+    },
+    "MakeMove": function (cmd) {
+      {
+	var x = parseInt(cmd.place[0]);
+	var y = parseInt(cmd.place[1]);
+	if (boardState[x][y] !== "") {
+	    // legal move
+	}
   };
 
   return {

@@ -99,3 +99,43 @@ describe('join game command', function(){
     JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
   });
 });
+
+
+describe('Make a move command', function() {
+    var given, when, then;
+
+    it('should be able to make a move', function() {
+      given= [{
+        id:"1234",
+        event:"GameCreated",
+        userName: "Steinar",
+        timeStamp: "2015.12.02T11:29:44"
+      },
+      {
+        id:"12345",
+        event:"GameJoined",
+        userName: "Gunni",
+        otherUserName: "Steinar",
+        timeStamp: "2015.12.02T11:30:50"
+      }];
+      when= {
+	id: "12345",
+	comm: "MakeMove",
+	player: "X",
+	place: "0,0",
+	timeStamp: "2015.12.02T11:30:55"
+      };
+      then= [{
+	id: "12345",
+	event: "Placed",
+	place: "0,0",
+	timeStamp: "2015.12.02T11:30:56"
+      }];
+
+
+      var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
+
+      JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
+
+    });
+});
