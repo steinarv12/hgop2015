@@ -1,4 +1,5 @@
-module.exports = {
+module.exports = function(){
+    return {
 
 	board:  [['','',''],
              ['','',''],
@@ -74,5 +75,6 @@ module.exports = {
               return true;
         }
 
+    }
     };
 };
