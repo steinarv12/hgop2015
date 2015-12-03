@@ -1,8 +1,8 @@
-var boardHandler = require('./boardHandler');
+var boardHandler = require('./boardHandler')();
 
 module.exports = function tictactoeCommandHandler(events) {
     var gameCreatedEvent = events[0];
-
+    console.log(boardHandler.makeMove);
     for (var i = 0; i < events.length; i++) {
         if (events[i].comm === "MakeMove") {
             boardHandler.makeMove(events[i]);

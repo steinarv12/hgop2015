@@ -100,7 +100,7 @@ describe('join game command', function(){
   });
 });
 
-// ff
+// f
 describe('Make a move command', function() {
     var given, when, then;
 
@@ -182,13 +182,12 @@ describe('Make a move command', function() {
       then= [{
         id: "12345",
         event: "Won X",
+        place: [0, 2],
         player: "X",
         userName: "Steinar",
         timeStamp: "2015.12.02T11:30:55"
       }];
-      console.log("Pre board:");
-      var board = tictactoeCommandHandler(given);
-      console.log(board);
+
       var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
 
       JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));

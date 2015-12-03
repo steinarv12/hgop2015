@@ -9,11 +9,11 @@ module.exports = function(){
         var event;
         var x = parseInt(cmd.place[0]);
         var y = parseInt(cmd.place[1]);
-        if (board[x][y] === "") {
-            board[x][y] = cmd.player;
-            if (checkWin())
-                event = "Win" + cmd.player;
-            else if (checkDraw())
+        if (this.board[x][y] === "") {
+            this.board[x][y] = cmd.player;
+            if (this.checkWin())
+                event = "Won " + cmd.player;
+            else if (this.checkDraw())
                 event = "Draw";
             else
                 event = "Set";
@@ -24,6 +24,7 @@ module.exports = function(){
         return [{
             id: cmd.id,
             event: event,
+            place: cmd.place,
             player: cmd.player,
             userName: cmd.userName,
             timeStamp: cmd.timeStamp
@@ -34,7 +35,7 @@ module.exports = function(){
 	checkDraw: function() {
 	    for (var i = 0; i < 3; i++) {
       		for (var j = 0; j < 3; j++) {
-        	    if (board[i][j] === '') {
+        	    if (this.board[i][j] === '') {
           		return false;
         	    }
       		}
@@ -46,32 +47,32 @@ module.exports = function(){
     checkWin: function () {
         // Horizontal win check
         for (var i = 0; i < 3; i++) {
-            if (board[i][0] === board[i][1] && 
-                board[i][1] === board[i][2] && 
-                    board[i][0] !== '') {
+            if (this.board[i][0] === this.board[i][1] && 
+                this.board[i][1] === this.board[i][2] && 
+                    this.board[i][0] !== '') {
                 return true;
             }
         }
 
         // Vertical win check
         for (i = 0; i < 3; i++) {
-            if (board[0][i] === board[1][i] &&
-                board[1][i] === board[2][i] &&
-                board[0][i] !== '') {
+            if (this.board[0][i] === this.board[1][i] &&
+                this.board[1][i] === this.board[2][i] &&
+                this.board[0][i] !== '') {
                 return true;
             }
         }
 
         // Diagonal win check
-        if (board[0][0] === board[1][1] &&
-    	board[1][1] === board[2][2] &&
-    	board[0][0] !== '') {
+        if (this.board[0][0] === this.board[1][1] &&
+    	this.board[1][1] === this.board[2][2] &&
+    	this.board[0][0] !== '') {
     	  return true;
     	}
 
-        if (board[0][2] === board[1][1] &&
-            board[1][1] === board[2][0] &&
-            board[0][2] !== '') {
+        if (this.board[0][2] === this.board[1][1] &&
+            this.board[1][1] === this.board[2][0] &&
+            this.board[0][2] !== '') {
               return true;
         }
 
