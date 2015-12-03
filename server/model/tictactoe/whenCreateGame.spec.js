@@ -100,7 +100,7 @@ describe('join game command', function(){
   });
 });
 
-
+// ff
 describe('Make a move command', function() {
     var given, when, then;
 
@@ -122,14 +122,16 @@ describe('Make a move command', function() {
 	id: "12345",
 	comm: "MakeMove",
 	player: "X",
-	place: "0,0",
+	userName: "Steinar",
+	place: [0, 0],
 	timeStamp: "2015.12.02T11:30:55"
       };
       then= [{
 	id: "12345",
-	event: "Placed",
-	place: "0,0",
-	timeStamp: "2015.12.02T11:30:56"
+	event: "Set",
+	player: "X",
+	userName: "Steinar",
+	timeStamp: "2015.12.02T11:30:55"
       }];
 
 
