@@ -134,10 +134,64 @@ describe('Make a move command', function() {
 	timeStamp: "2015.12.02T11:30:55"
       }];
 
-
       var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
 
       JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
 
     });
+
+    it('should be able to win a game', function () {
+      given= [{
+        id:"1234",
+        event:"GameCreated",
+        userName: "Steinar",
+        timeStamp: "2015.12.02T11:29:44"
+      },
+      {
+        id:"12345",
+        event:"GameJoined",
+        userName: "Gunni",
+        otherUserName: "Steinar",
+        timeStamp: "2015.12.02T11:30:50"
+      },
+      {
+        id: "12345",
+        comm: "MakeMove",
+        player: "X",
+        userName: "Steinar",
+        place: [0, 0],
+        timeStamp: "2015.12.02T11:30:55"
+      },
+      {
+        id: "12345",
+        comm: "MakeMove",
+        player: "X",
+        userName: "Steinar",
+        place: [0, 1],
+        timeStamp: "2015.12.02T11:30:55"
+      }];
+      when= {
+        id: "12345",
+        comm: "MakeMove",
+        player: "X",
+        userName: "Steinar",
+        place: [0, 2],
+        timeStamp: "2015.12.02T11:30:55"
+      };
+      then= [{
+        id: "12345",
+        event: "Won X",
+        player: "X",
+        userName: "Steinar",
+        timeStamp: "2015.12.02T11:30:55"
+      }];
+      console.log("Pre board:");
+      var board = tictactoeCommandHandler(given);
+      console.log(board);
+      var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
+
+      JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
+
+    });
+
 });
