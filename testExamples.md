@@ -60,13 +60,20 @@ When (placed (0,1,x) at 1448992625.457)
 NextState (error - not x's turn)
 ```
 
-## Board for reference
+## Board for reference in this example
 
 ```
- y
-2| o,  x,  o
-1| x,  o,  x
-0| x,  o,  x
------------- x
    0   1   2
+------------
+0| x,  o,  x
+1| x,  o,  x
+2| o,  x,  o
 ```
+
+
+
+
+
+
+
+
