@@ -1,4 +1,5 @@
 module.exports = function tictactoeCommandHandler(events) {
+
     var boardHandler = require('./boardHandler')();
 
     // Store the event that an illegal move was made due to
