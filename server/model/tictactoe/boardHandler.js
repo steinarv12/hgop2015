@@ -1,6 +1,7 @@
 module.exports = function(){
     return {
 
+        var previousCmd;
     	board:  [['','',''],
                  ['','',''],
                  ['','','']],
@@ -9,6 +10,11 @@ module.exports = function(){
             var event;
             var row = parseInt(cmd.place[0]);
             var col = parseInt(cmd.place[1]);
+            /*
+                        if (this.board[row][col] === "" && 
+                null !== previousCmd &&
+                previousCmd.player !== cmd.player)
+            */
             if (this.board[row][col] === "") {
                 this.board[row][col] = cmd.player;
                 if (this.checkWin())
@@ -21,6 +27,7 @@ module.exports = function(){
             else {
                 event = "IllegalMove";
             }
+            previousCmd = cmd;
             return [{
                 id: cmd.id,
                 event: event,

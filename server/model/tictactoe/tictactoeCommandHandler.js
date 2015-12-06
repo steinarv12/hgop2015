@@ -3,11 +3,6 @@ module.exports = function tictactoeCommandHandler(events) {
     var boardHandler = require('./boardHandler')();
 
     var gameCreatedEvent = events[0];
-    for (var i = 0; i < events.length; i++) {
-        if (events[i].event === "Set") {
-            handlers["Set"](events[i]);
-        }
-    };
 
     var handlers = {
         "CreateGame": function (cmd) {
@@ -51,6 +46,12 @@ module.exports = function tictactoeCommandHandler(events) {
         }
     };
 
+    for (var i = 0; i < events.length; i++) {
+        if (events[i].event === "Set") {
+            handlers["MakeMove"](events[i]);
+            //boardHandler.makeMove(events[i]);
+        }
+    };
 
     return {
         executeCommand: function (cmd) {
