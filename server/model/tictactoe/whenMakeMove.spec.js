@@ -1,3 +1,4 @@
+/*
 var tictactoeCommandHandler = require('./tictactoeCommandHandler');
 
 describe('when make move command', function(){
@@ -89,3 +90,4 @@ describe('when make move command', function(){
     });
   });
 });
+*/

@@ -7,6 +7,9 @@ if [ $# -ne 1 ]; then
     exit 1
 fi
 
+# Script on test machine and run it instead?
+# If name does not exist on test, then what?
+
 echo "SSH to Test machine..."
 ssh $SSHPATH '
 docker stop tic

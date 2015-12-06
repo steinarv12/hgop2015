@@ -2,13 +2,10 @@ module.exports = function tictactoeCommandHandler(events) {
 
     var boardHandler = require('./boardHandler')();
 
-    // Store the event that an illegal move was made due to
-    // the same player trying to play 2 or more consecutive plays?
-
     var gameCreatedEvent = events[0];
     for (var i = 0; i < events.length; i++) {
         if (events[i].event === "Set") {
-            boardHandler.makeMove(events[i]);
+            handlers["Set"](events[i]);
         }
     };
 
@@ -17,10 +14,14 @@ module.exports = function tictactoeCommandHandler(events) {
             {
                 return [{
                     id: cmd.id,
+                    gameId: cmd.gameId,
                     event: "GameCreated",
+                    name: cmd.name,
                     userName: cmd.userName,
                     timeStamp: cmd.timeStamp
                 }];
+
+
             }
         },
         "JoinGame": function (cmd) {
@@ -44,6 +45,7 @@ module.exports = function tictactoeCommandHandler(events) {
         },
         "MakeMove": function (cmd) {
             {
+
                 return boardHandler.makeMove(cmd);
             }
         }

@@ -7,17 +7,20 @@ describe('create game command', function(){
     it('should create game',function(){
         given= [];
         when={
-            id:"1234",
-            comm:"CreateGame",
+            id: "1234",
+            gameId: "999",
+            comm: "CreateGame",
             userName : "Steinar",
-            name:"TheFirstGame",
-            timeStamp: "2015.12.02T11:29:44"
+            name: "TestGame",
+            timeStamp: "2015.12.02T10:29:44"
         };
         then=[{
             id:"1234",
-            event:"GameCreated",
+            gameId: "999",
+            event: "GameCreated",
+            name: "TestGame",
             userName: "Steinar",
-            timeStamp: "2015.12.02T11:29:44"
+            timeStamp: "2015.12.02T10:29:44"
         }];
 
         var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
@@ -28,15 +31,18 @@ describe('create game command', function(){
     it('should create game with another user another time',function(){
         given= [];
         when={
-            id:"12347",
-            comm:"CreateGame",
+            id: "12345",
+            gameId: "999",
+            comm: "CreateGame",
             userName : "Gunni",
-            name:"TheFirstGame",
+            name: "TestGame",
             timeStamp: "2015.12.02T10:29:44"
         };
         then=[{
-            id:"12347",
-            event:"GameCreated",
+            id: "12345",
+            gameId: "999",
+            event: "GameCreated",
+            name: "TestGame",
             userName: "Gunni",
             timeStamp: "2015.12.02T10:29:44"
         }];
