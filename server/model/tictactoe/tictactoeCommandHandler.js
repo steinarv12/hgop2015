@@ -48,8 +48,8 @@ module.exports = function tictactoeCommandHandler(events) {
 
     for (var i = 0; i < events.length; i++) {
         if (events[i].event === "Set") {
-            handlers["MakeMove"](events[i]);
-            //boardHandler.makeMove(events[i]);
+            //handlers["MakeMove"](events[i]);
+            boardHandler.makeMove(events[i]);
         }
     };
 
