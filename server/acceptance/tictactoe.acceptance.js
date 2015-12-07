@@ -4,6 +4,35 @@ var should = require('should');
 var request = require('supertest');
 var acceptanceUrl = process.env.ACCEPTANCE_URL;
 
+/*
+function given(cmdName){
+    var cmd = {
+        name: cmdName,
+        destination: undefined
+    };
+    var expectations = [];
+    var givenApi = {
+        sendTo: function(dest){
+            cmd.destination = dest;
+            return givenApi;
+        },
+        expect: function(eventName){
+            expectations.push(eventName);
+            return givenApi;
+        },
+        and: givenApi.expect,
+        when: function(done){
+            .. perform test logic here.
+            .. call done in the end
+            done()
+        }
+    }
+    return givenApi;
+}
+
+
+given("commandA").sentTo("C").expect('B').and('C').when(done);
+*/
 
 describe('TEST ENV GET /api/gameHistory', function () {
 
