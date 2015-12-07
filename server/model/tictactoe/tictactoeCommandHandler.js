@@ -51,7 +51,7 @@ module.exports = function tictactoeCommandHandler(events) {
             //handlers["MakeMove"](events[i]);
             boardHandler.makeMove(events[i]);
         }
-    };
+    }
 
     return {
         executeCommand: function (cmd) {
