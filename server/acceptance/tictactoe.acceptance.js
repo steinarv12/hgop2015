@@ -55,7 +55,7 @@ describe('TEST ENV GET /api/gameHistory', function () {
      /*
      given(user("YourUser").createsGame("TheFirstGame"))
      .expect("GameCreated").withName("TheFirstGame").isOk(done);
-      */
+     */
      done();
    });
 
