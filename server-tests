@@ -1,0 +1,38 @@
+
+[0m[0m
+Express server listening on 9000, in development mode
+[0m  GET /api/gameHistory[0m
+[90mPOST /api/createGame [32m200 [90m9ms - 127b[0m
+[90mGET /api/gameHistory/999 [32m200 [90m2ms - 127b[0m
+[2K[0G  [32m  ✓[0m[90m should respond with JSON array with created events for game [0m[33m(53ms)[0m
+
+[0m  In memory store[0m
+[2K[0G  [32m  ✓[0m[90m Should return empty array for unknown id [0m
+[2K[0G  [32m  ✓[0m[90m Should return events previously stored [0m
+[2K[0G  [32m  ✓[0m[90m should append stored events to events previously stored [0m
+
+[0m  tictactoe game context[0m
+[2K[0G  [32m  ✓[0m[90m should route command to instantiated tictactoe game with event stream from store and return and store generated events. Test using fakes/stubs. [0m
+[2K[0G  [32m  ✓[0m[90m should route command to instantiated tictactoe game with event stream from store and return generated events, using mock style tests. [0m
+
+[0m  create game command[0m
+[2K[0G  [32m  ✓[0m[90m should create game [0m
+[2K[0G  [32m  ✓[0m[90m should create game with another user another time [0m
+
+[0m  join game command[0m
+[2K[0G  [32m  ✓[0m[90m should join game [0m
+[2K[0G  [32m  ✓[0m[90m should reject joining of a non-existing game [0m
+
+[0m  Make a move command[0m
+[2K[0G  [32m  ✓[0m[90m should be able to make a move [0m
+[2K[0G  [32m  ✓[0m[90m Should not be able for a player to make a move twice in a row [0m
+[2K[0G  [32m  ✓[0m[90m should not be able to make a move on a taken spot [0m
+[2K[0G  [32m  ✓[0m[90m should be able to win a game horizontal [0m
+[2K[0G  [32m  ✓[0m[90m should be able to win a game vertical [0m
+[2K[0G  [32m  ✓[0m[90m should be able to win a game across, top to bottom [0m
+[2K[0G  [32m  ✓[0m[90m should be able to win a game across, bottom to top [0m
+[2K[0G  [32m  ✓[0m[90m should be able to tie a game [0m
+
+
+[92m [0m[32m 18 passing[0m[90m (82ms)[0m
+
