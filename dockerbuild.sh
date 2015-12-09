@@ -5,7 +5,6 @@ rm -rf ./dist
 
 echo Building app
 grunt
-rc=$?; if [[ $rc != 0 ]]; then echo "Grunt failed" && exit $rc; fi
 
 rc=$?
 if [[ $rc != 0 ]] ; then
@@ -26,11 +25,19 @@ fi
 
 echo Building docker image
 docker build -t steinarv12/tictactoe .
-rc=$?; if [[ $rc != 0 ]]; then echo "Docker build failed" && exit $rc; fi
 
 rc=$?
 if [[ $rc != 0 ]] ; then
     echo "Docker build failed " $rc
+    exit $rc
+fi
+
+echo Pushing docker image
+docker push steinarv12/tictactoe
+
+rc=$?
+if [[ $rc != 0 ]] ; then
+    echo "Docker push failed " $rc
     exit $rc
 fi
 
