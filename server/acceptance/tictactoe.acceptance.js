@@ -58,9 +58,10 @@ function given(action) {
             for (var i = 0; i < commands.length; i++) {
                 commands[i].gameId = expectEvent.id;
                 sendCommand(commands[i], function(cntr) {
-                    
+                    setTimeout(function () {}, 1000)
                 });
             }
+
             function compareToActual(actualEvents) {
                 var lastEvent = actualEvents[actualEvents.length - 1];
 
@@ -177,6 +178,6 @@ describe('TEST ENV GET /api/gameHistory', function () {
             .and(action("Steinar").placeAt(1,2))
             .and(action("Gunni").placeAt(2,2))
             .and(action("Steinar").placeAt(2,1))
-        .expect("Draw").byUser("Steinar").finish("done");
+        .expect("Draw").byUser("Steinar").finish(done);
     });
 });
