@@ -1,5 +1,8 @@
 'use strict';
 
+// Replace player X and O with a way to
+// map it to users
+
 var should = require('should');
 var request = require('supertest');
 var acceptanceUrl = process.env.ACCEPTANCE_URL;
@@ -11,7 +14,9 @@ function sendCommand(cmd) {
         .type('json')
         .send(cmd)
         .end(function (err, res) {
-            console.log(res);
+            if (err) {
+                console.log(err);
+            }
         });
 };
 
@@ -32,7 +37,6 @@ function given(action) {
         userName: undefined,
         id: undefined
     }
-    expectEvent.id = action.cmd.id;
     var commands = [];
     commands.push(action.cmd);
 
@@ -49,31 +53,26 @@ function given(action) {
             expectEvent.userName = userName;
             return givenAPI;
         },
+        withId: function(gameId) {
+            expectEvent.id = gameId;
+            return givenAPI;
+        }
         finish: function(done) {
-            function asyncEach(cmds, callback) {
-                for (var i = 0; i < cmds.length; ++i) {
-                    // boundCallback is a new function which has arr[i] permanently
-                    // set (partially applied) as its first argument.  The "null" argument
-                    // is the binding for the `this` context variable in the callback, which
-                    // we don't care about in this example...
-                    var boundCallback = callback.bind(null, cmds[i]);
-                    setTimeout(boundCallback, 0);
-                }
+            for (var i = 0; i < commands.length; i++) {
+                commands[i].gameId = expectEvent.id;
+                sendCommand(commands[i], function(cntr) {
+                    
+                });
             }
-            asyncEach(commands, sendCommand);
-            function compareToActual(actualEvent) {
-                should(actualEvent).eql(
-                  [{
-                    "id": "1234",
-                    "gameId": "999",
-                    "event": "GameCreated",
-                    "userName": "Gulli",
-                    "name": "TheFirstGame",
-                    "timeStamp": "2014-12-02T11:29:29"
-                  }]);
+            function compareToActual(actualEvents) {
+                var lastEvent = actualEvents[actualEvents.length - 1];
+
+                should(lastEvent.event).eql(expectEvent.eventName);
+                should(lastEvent.userName).eql(expectEvent.userName);
+                should(lastEvent.gameId).eql(expectEvent.id);
                 done();
             }
-            var actualEvents = getHistory(expectEvent.id, compareToActual);
+            getHistory(expectEvent.id, compareToActual);
         }
     }
     return givenAPI;
@@ -105,6 +104,7 @@ function action(userName) {
         },
         cmd: {
             id: 1234,
+            gameId: 1111,
             comm: undefined,
             player: undefined,
             userName: undefined,
@@ -164,12 +164,18 @@ describe('TEST ENV GET /api/gameHistory', function () {
   });
 
 
-   it('Should execute fluid API test', function (done) {
-     /*
-     given(user("YourUser").createsGame("TheFirstGame"))
-     .expect("GameCreated").withName("TheFirstGame").isOk(done);
-     */
-     done();
-   });
+    it('Should execute fluid API test', function (done) {
+        given(action("YourUser").createGame("TheFirstGame")).withId(170)
+        .expect("GameCreated").byUser("YourUser").finish(done);
+    });
+
+    it('Should play game until won or drawn', function (done) {
+        given(action("YourUser").createGame("GameIdOne").withName("TheFirstGame"))
+            .withId(180)
+            .and(action("OtherUser").joinGame("GameIdOne"))
+            .and(action("YourUser").placeAt(0,0))
+            .and(action("OtherUser").placeAt(1,1))
+        .expect("GameDraw").byUser("OtherUser").finish("done");
+    });
 
 });
