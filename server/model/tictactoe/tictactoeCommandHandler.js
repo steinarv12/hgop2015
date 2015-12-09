@@ -8,7 +8,6 @@ module.exports = function tictactoeCommandHandler(events) {
         "CreateGame": function (cmd) {
             {
                 return [{
-                    id: cmd.id,
                     gameId: cmd.gameId,
                     event: "GameCreated",
                     name: cmd.name,
@@ -23,14 +22,14 @@ module.exports = function tictactoeCommandHandler(events) {
             {
                 if (gameCreatedEvent === undefined) {
                     return [{
-                        id: cmd.id,
+                        gameId: cmd.gameId,
                         event: "GameDoesNotExist",
                         userName: cmd.userName,
                         timeStamp: cmd.timeStamp
                     }];
                 }
                 return [{
-                    id: cmd.id,
+                    gameId: cmd.gameId,
                     event: "GameJoined",
                     userName: cmd.userName,
                     otherUserName: gameCreatedEvent.userName,
@@ -48,7 +47,6 @@ module.exports = function tictactoeCommandHandler(events) {
 
     for (var i = 0; i < events.length; i++) {
         if (events[i].event === "Set") {
-            //handlers["MakeMove"](events[i]);
             boardHandler.makeMove(events[i]);
         }
     }
