@@ -160,17 +160,23 @@ describe('TEST ENV GET /api/gameHistory', function () {
 
 
     it('Should execute fluid API test', function (done) {
-        given(action("YourUser").createGame("TheFirstGame")).withId(170)
-        .expect("GameCreated").byUser("YourUser").finish(done);
+        given(action("Steinar").createGame("TheFirstGame")).withId(170)
+        .expect("GameCreated").byUser("Steinar").finish(done);
     });
 
     it('Should play game until won or drawn', function (done) {
-        given(action("YourUser").createGame("GameIdOne").withName("TheFirstGame"))
+        given(action("Steinar").createGame("GameIdOne").withName("TheFirstGame"))
             .withId(180)
-            .and(action("OtherUser").joinGame("GameIdOne"))
-            .and(action("YourUser").placeAt(0,0))
-            .and(action("OtherUser").placeAt(1,1))
-        .expect("GameDraw").byUser("OtherUser").finish("done");
+            .and(action("Gunni").joinGame("GameIdOne"))
+            .and(action("Steinar").placeAt(0,0))
+            .and(action("Gunni").placeAt(0,1))
+            .and(action("Steinar").placeAt(0,2))
+            .and(action("Gunni").placeAt(1,1))
+            .and(action("Steinar").placeAt(1,0))
+            .and(action("Gunni").placeAt(2,0))
+            .and(action("Steinar").placeAt(1,2))
+            .and(action("Gunni").placeAt(2,2))
+            .and(action("Steinar").placeAt(2,1))
+        .expect("Draw").byUser("Steinar").finish("done");
     });
-
 });
