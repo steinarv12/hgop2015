@@ -1,38 +1,122 @@
 'use strict';
 
+// Replace player X and O with a way to
+// map it to users
+
 var should = require('should');
 var request = require('supertest');
 var acceptanceUrl = process.env.ACCEPTANCE_URL;
 
-/*
-function given(cmdName){
-    var cmd = {
-        name: cmdName,
-        destination: undefined
-    };
-    var expectations = [];
-    var givenApi = {
-        sendTo: function(dest){
-            cmd.destination = dest;
-            return givenApi;
+function sendCommand(cmd) {
+    var req = request(acceptanceUrl);
+    req
+        .post(cmd.path)
+        .type('json')
+        .send(cmd)
+        .end(function (err, res) {
+            if (err) {
+                console.log(err);
+            }
+        });
+};
+
+function getHistory(id, callback) {
+    var req = request(acceptanceUrl);
+    req
+      .get('/api/gameHistory/' + id)
+      .expect(200)
+      .expect('Content-Type', /json/)
+      .end(function (err, res) {
+        callback(res.body);
+      });
+};
+
+function given(action) {
+    var expectEvent = {
+        eventName: undefined,
+        userName: undefined,
+        id: undefined
+    }
+    var commands = [];
+    commands.push(action.cmd);
+
+    var givenAPI = {
+        and: function(action) {
+            commands.push(action.cmd);
+            return givenAPI;
         },
-        expect: function(eventName){
-            expectations.push(eventName);
-            return givenApi;
+        expect: function(eventName) {
+            expectEvent.eventName = eventName;
+            return givenAPI;
         },
-        and: givenApi.expect,
-        when: function(done){
-            .. perform test logic here.
-            .. call done in the end
-            done()
+        byUser: function(userName) {
+            expectEvent.userName = userName;
+            return givenAPI;
+        },
+        withId: function(gameId) {
+            expectEvent.id = gameId;
+            return givenAPI;
+        }
+        finish: function(done) {
+            for (var i = 0; i < commands.length; i++) {
+                commands[i].gameId = expectEvent.id;
+                sendCommand(commands[i], function(cntr) {
+                    
+                });
+            }
+            function compareToActual(actualEvents) {
+                var lastEvent = actualEvents[actualEvents.length - 1];
+
+                should(lastEvent.event).eql(expectEvent.eventName);
+                should(lastEvent.userName).eql(expectEvent.userName);
+                should(lastEvent.gameId).eql(expectEvent.id);
+                done();
+            }
+            getHistory(expectEvent.id, compareToActual);
         }
     }
-    return givenApi;
-}
+    return givenAPI;
+};
 
-
-given("commandA").sentTo("C").expect('B').and('C').when(done);
-*/
+function action(userName) {
+    var commandAPI = {
+        createGame: function(gameName) {
+            this.cmd.name = gameName;
+            this.cmd.comm = "CreateGame";
+            this.cmd.path = "/api/createGame"
+            return commandAPI;
+        },
+        withName: function(nameOfGame) {
+            this.cmd.name = nameOfGame;
+            return commandAPI;
+        },
+        placeAt: function(row, col) {
+            this.cmd.place = [row, col];
+            this.cmd.comm = "MakeMove";
+            this.cmd.path = "/api/placeMove"
+            return commandAPI;
+        },
+        joinGame: function(gameName) {
+            this.cmd.comm = "JoinGame";
+            this.cmd.name = gameName;
+            this.cmd.path = "/api/joinGame"
+            return commandAPI;
+        },
+        cmd: {
+            id: 1234,
+            gameId: 1111,
+            comm: undefined,
+            player: undefined,
+            userName: undefined,
+            place: undefined,
+            name: undefined,
+            timeStamp: "2014-12-02T11:29:29",
+            path: undefined
+        }
+    }
+    commandAPI.cmd.userName = userName;
+    return commandAPI;
+};
 
 describe('TEST ENV GET /api/gameHistory', function () {
 
@@ -42,7 +126,7 @@ describe('TEST ENV GET /api/gameHistory', function () {
 
   it('should execute same test using old style', function (done) {
 
-    var command =     {
+    var command = {
       id : "1234",
       gameId : "999",
       comm: "CreateGame",
@@ -80,12 +164,18 @@ describe('TEST ENV GET /api/gameHistory', function () {
   });
 
 
-   it('Should execute fluid API test', function (done) {
-     /*
-     given(user("YourUser").createsGame("TheFirstGame"))
-     .expect("GameCreated").withName("TheFirstGame").isOk(done);
-     */
-     done();
-   });
+    it('Should execute fluid API test', function (done) {
+        given(action("YourUser").createGame("TheFirstGame")).withId(170)
+        .expect("GameCreated").byUser("YourUser").finish(done);
+    });
+
+    it('Should play game until won or drawn', function (done) {
+        given(action("YourUser").createGame("GameIdOne").withName("TheFirstGame"))
+            .withId(180)
+            .and(action("OtherUser").joinGame("GameIdOne"))
+            .and(action("YourUser").placeAt(0,0))
+            .and(action("OtherUser").placeAt(1,1))
+        .expect("GameDraw").byUser("OtherUser").finish("done");
+    });
 
 });
