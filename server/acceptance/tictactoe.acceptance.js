@@ -1,8 +1,5 @@
 'use strict';
 
-// Replace player X and O with a way to
-// map it to users
-
 var should = require('should');
 var request = require('supertest');
 var acceptanceUrl = process.env.ACCEPTANCE_URL;
@@ -18,7 +15,7 @@ function sendCommand(cmd) {
                 console.log(err);
             }
         });
-};
+}
 
 function getHistory(id, callback) {
     var req = request(acceptanceUrl);
@@ -29,7 +26,7 @@ function getHistory(id, callback) {
       .end(function (err, res) {
         callback(res.body);
       });
-};
+}
 
 function given(action) {
     var expectEvent = {
@@ -56,7 +53,7 @@ function given(action) {
         withId: function(gameId) {
             expectEvent.id = gameId;
             return givenAPI;
-        }
+        },
         finish: function(done) {
             for (var i = 0; i < commands.length; i++) {
                 commands[i].gameId = expectEvent.id;
@@ -76,7 +73,7 @@ function given(action) {
         }
     }
     return givenAPI;
-};
+}
 
 function action(userName) {
     var commandAPI = {
@@ -116,7 +113,7 @@ function action(userName) {
     }
     commandAPI.cmd.userName = userName;
     return commandAPI;
-};
+}
 
 describe('TEST ENV GET /api/gameHistory', function () {
 
@@ -127,7 +124,6 @@ describe('TEST ENV GET /api/gameHistory', function () {
   it('should execute same test using old style', function (done) {
 
     var command = {
-      id : "1234",
       gameId : "999",
       comm: "CreateGame",
       userName: "Gulli",
