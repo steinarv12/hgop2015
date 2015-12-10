@@ -115,6 +115,8 @@ function action(userName) {
     commandAPI.cmd.userName = userName;
     return commandAPI;
 }
+// var given = require('../fluid-api/tictactoeFluid').given;
+// var user = require('../fluid-api/tictactoeFluid').user;
 
 describe('TEST ENV GET /api/gameHistory', function () {
 
