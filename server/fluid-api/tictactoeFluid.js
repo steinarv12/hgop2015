@@ -2,73 +2,157 @@ var should = require('should');
 var request = require('supertest');
 var acceptanceUrl = process.env.ACCEPTANCE_URL;
 
-function given(userApi) {
-  var _expectedEvents=[{
-    "id": "1234",
-    "gameId": userApi._command.gameId,
-    "event": "EventName",
-    "userName": userApi._command.userName,
-    "name": userApi._command.gameId,
-    "timeStamp": "2014-12-02T11:29:29"
-  }];
-  var _currentEvent = 0;
-  var expectApi = {
-    withName: function (gameName) {
-      _expectedEvents[_currentEvent].name = gameName;
-      return expectApi;
-    },
-    expect: function (eventName) {
-      _expectedEvents[_currentEvent].event = eventName;
-      return expectApi;
-    },
-    isOk: function (done) {
-      var req = request(acceptanceUrl);
-      req
-        .post('/api/createGame')
+function sendCommand(cmd, callback) {
+    var req = request(acceptanceUrl);
+    req
+        .post(cmd.path)
         .type('json')
-        .send(userApi._command)
+        .send(cmd)
         .end(function (err, res) {
-          if (err) return done(err);
-          request(acceptanceUrl)
-            .get('/api/gameHistory/' + userApi._command.gameId)
-            .expect(200)
-            .expect('Content-Type', /json/)
-            .end(function (err, res) {
-              if (err) return done(err);
-              res.body.should.be.instanceof(Array);
-              should(res.body).eql(
-                _expectedEvents);
-              done();
-            });
+            if (err) {
+                console.log(err);
+            }
+            callback(res.body);
         });
-      return expectApi;
-    },
-  };
-
-  return expectApi;
 }
 
-function user(userName) {
-  var userApi = {
-    _command: undefined,
-    createsGame: function (gameId) {
-      userApi._command = {
-        id: "1234",
-        gameId: gameId,
-        comm: "CreateGame",
-        userName: userName,
-        name: gameId,
-        timeStamp: "2014-12-02T11:29:29"
-      };
-      return userApi;
-    },
-    withId : function(gameId){
-      userApi._command.gameId = gameId;
-      return userApi;
+function getHistory(id, callback) {
+    var req = request(acceptanceUrl);
+    req
+      .get('/api/gameHistory/' + id)
+      .expect(200)
+      .expect('Content-Type', /json/)
+      .end(function (err, res) {
+        callback(res.body);
+      });
+}
+
+function given(action) {
+    var expectEvent = {
+        eventName: undefined,
+        userName: undefined,
+        id: undefined
     }
-  };
-  return userApi
+    var commands = [];
+    commands.push(action.cmd);
+
+    var givenAPI = {
+        and: function(action) {
+            commands.push(action.cmd);
+            return givenAPI;
+        },
+        expect: function(eventName) {
+            expectEvent.eventName = eventName;
+            return givenAPI;
+        },
+        byUser: function(userName) {
+            expectEvent.userName = userName;
+            return givenAPI;
+        },
+        withId: function(gameId) {
+            expectEvent.id = gameId;
+            return givenAPI;
+        },
+        finish: function(done) {
+            /*
+            for (var i = 0; i < commands.length; i++) {
+                commands[i].gameId = expectEvent.id;
+                sendCommand(commands[i], function(cntr) {
+                    setTimeout(function () {}, 1000)
+                });
+            }
+            */
+            function asyncLoop(iterations, func, callback) {
+                var index = 0;
+                var done = false;
+                var loop = {
+                    next: function() {
+                        if (done) {
+                            return;
+                        }
+
+                        if (index < iterations) {
+                            index++;
+                            func(loop);
+                        } else {
+                            done = true;
+                            callback();
+                        }
+                    },
+
+                    iteration: function() {
+                        return index - 1;
+                    },
+
+                    break: function() {
+                        done = true;
+                        callback();
+                    }
+                };
+                loop.next();
+                return loop;
+            }
+            function compareToActual(actualEvents) {
+                var lastEvent = actualEvents[actualEvents.length - 1];
+
+                should(lastEvent.event).eql(expectEvent.eventName);
+                should(lastEvent.userName).eql(expectEvent.userName);
+                should(lastEvent.gameId).eql(expectEvent.id);
+                done();
+            }
+            function compareAsync() {
+                getHistory(expectEvent.id, compareToActual);
+            }
+            asyncLoop(commands.length, function(loop) {
+                commands[loop.iteration()].gameId = expectEvent.id;
+                sendCommand(commands[loop.iteration()], function(result) {
+                    loop.next();
+                })},
+                compareAsync
+            );
+        }
+    }
+    return givenAPI;
 }
 
-module.exports.user = user;
+function action(userName) {
+    var commandAPI = {
+        createGame: function(gameName) {
+            this.cmd.name = gameName;
+            this.cmd.comm = "CreateGame";
+            this.cmd.path = "/api/createGame"
+            return commandAPI;
+        },
+        withName: function(nameOfGame) {
+            this.cmd.name = nameOfGame;
+            return commandAPI;
+        },
+        placeAt: function(row, col) {
+            this.cmd.place = [row, col];
+            this.cmd.comm = "MakeMove";
+            this.cmd.path = "/api/placeMove"
+            return commandAPI;
+        },
+        joinGame: function(gameName) {
+            this.cmd.comm = "JoinGame";
+            this.cmd.name = gameName;
+            this.cmd.path = "/api/joinGame"
+            return commandAPI;
+        },
+        cmd: {
+            id: 1234,
+            gameId: undefined,
+            comm: undefined,
+            userName: undefined,
+            place: undefined,
+            name: undefined,
+            timeStamp: "2014-12-02T11:29:29",
+            path: undefined
+        }
+    }
+    commandAPI.cmd.userName = userName;
+    return commandAPI;
+}
+
+module.exports.action = action;
 module.exports.given = given;

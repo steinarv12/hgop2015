@@ -1,10 +1,10 @@
-var user = require('../fluid-api/tictactoeFluid').user;
+var action = require('../fluid-api/tictactoeFluid').action;
 var given = require('../fluid-api/tictactoeFluid').given;
 
 it('Should play 1000 games in x seconds.', function (done) {
   var doneCount = 0;
   var gamesToPlay = 1000;
-  var x = 6;
+  var x = 7;
 
   this.timeout(x * 1000);
 
@@ -14,11 +14,8 @@ it('Should play 1000 games in x seconds.', function (done) {
     }
   };
 
-  for (var gameId = 0; gameId < gamesToPlay; gameId++) {
-    given(user("TestUserOne").createsGame("" + gameId))
-
-      ...play game to end...
-
-      .expect("GameCreated").isOk(QED);
-  }
+    for (var gameId = 0; gameId < gamesToPlay; gameId++) {
+        given(action("Steinar").createGame("TheFirstGame")).withId(gameId)
+        .expect("GameCreated").byUser("Steinar").finish(QED);
+    }
 });

@@ -132,7 +132,7 @@ module.exports = function (grunt) {
           'server/**/*.js',
           '!server/**/*.acceptance.js',
           '!server/**/*.load.js',
-          '!server/**/*.spec.js'
+          '!server/**/*.spec.js',
         ]
       },
       serverTest: {
