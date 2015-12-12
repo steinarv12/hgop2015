@@ -3,6 +3,9 @@
 echo Cleaning...
 rm -rf ./dist
 
+# Mocha exports
+export MOCHA_REPORTER=xunit
+export MOCHA_REPORT=reports/server-test.xml
 
 if [ -z "$GIT_COMMIT" ]; then
   export GIT_COMMIT=$(git rev-parse HEAD)
