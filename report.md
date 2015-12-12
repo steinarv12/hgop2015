@@ -4,6 +4,10 @@
 
 Hugbúnaður sem setur upp sýndarvélar. Notandinn setur inn þær stillingar sem hann vill og Vagrant sér um að setja allt upp m.v. hvernig Vagrantfile skráin er sett upp. Mjög þægilegt til þess bæði að sleppa við tíma í að setja upp vélina handvirkt og að fá sömu niðurstöðu í hvert sinn sem vél er sett upp.
 
+### Day 2 viðbót
+
+Config kerfi sem þetta halda utan um innihald véla og, líkt og Puppet, hjálpa okkur að halda utan um vélarnar sem allt umhverfið keyrir á. Passa upp á að það þurfi ekki að setja þær handvirkt upp með tilheyrandi villutíðni.
+
 ## VirtualBox
 
 VirtualBox er hugbúnaður sem býr til og sér um sýndarvélar.
@@ -12,9 +16,17 @@ VirtualBox er hugbúnaður sem býr til og sér um sýndarvélar.
 
 Grunt er forrit sem sér um að keyra JavaScript verkefni út frá stillingaskrá. Þessi verkefni eru oftast þess eðlis að sjálfvirknivæða hluti eins og að þýða LESS og CASS, setja saman JavaScript skrár og "uglifia" þær sem dæmi. Oftast er Grunt nýtt í að sjálfvirknivæða þessa ferla.
 
+### Day 2 viðbót
+
+Hjálpar okkur að sjálfvirknivæða keyrslu á prófunum svo ekki þurfi að keyra þau handvirkt, sem er "antipattern".
+
 ## npm
 
 NPM (Node Package Manager) er pakkakerfi fyrir Node.js. Kerfið sér um að halda utan um útgáfur og uppsetningu á pökkum (forritum) sem, oft, koma Node.js við og snúast þessir pakkr að vefþjónustu parti vefþróunar.
+
+### Day 2 viðbót
+
+Svona pakkakerfi hjálpa okkur að halda utan um umhverfið svo ekki þurfi að passa handvirkt upp á að allir hlutir séu í réttri útgáfu.
 
 ## nodejs
 
@@ -23,6 +35,22 @@ NodeJS er vefþróunarforrit sem byggir á V8 JavaScript vélinni frá Google. N
 ## bower
 
 Bower, eins og NPM, er pakkakerfi nema fyrir framendaforritun. Angular, jquery, bootstrap o.fl.
+
+## Git
+
+Auka viðbót við listann sem mér fannst vanta.
+
+Git sér um að halda utan um allan kóða hjá okkur, útgáfur af honum og tilgang með athugasemdum í commit.
+
+### Day 2 viðbót
+
+Sama og NPM, pakkakerfi sem hjálpar okkur að halda öllum framendakeyrslum í sömu útgáfu.
+
+# Day 2 topology
+
+Við höfum komið upp kerfi sem sér um að halda utan um production-test vélina okkar með Vagrant og kerfi til að halda utan um nýjustu útgáfu verkefnis með Docker. Forritin sem nefnd eru hér að ofan hjálpa öll til og eru komin í fulla notkun að passa upp á að ef vélin eyðileggst út af einhverri útgáfu tapast ekkert nema það sem við áttum eftir að commita.
+
+Strax er komin nokkuð öflugt kerfi fyrir sem gæti haldið utan um prófanir og deployment á einföldum forritum sem væru frekar til skemmtunar heldur en vara. 
 
 # NodeJS - Serial/parallel
 
@@ -33,3 +61,4 @@ NodeJS keyrir á aðeins einum þræði en með asynchronous hætti. Þannig er 
 Þetta er það sem kallað er Non-blocking I/O. Þó svo að I/O skipun (lesa úr skrá/gagnagrunn) sé keyrð, stöðvar hún ekki keyrslu og það þarf ekki að passa upp á þráðaákeyrslu eða neitt slíkt (concurrent vesen) frá sjónarhorni forritarans.
 
 Þegar álagsprófunin er keyrð keyrir hún því serial frá okkar sjónarhorni þar sem aðeins ein fyrirspurn er tekin fyrir í einu. Þegar fyrirspurnirnar svo klárast er þeim svarað þegar að þeim kemur í biðröðinni.
+
