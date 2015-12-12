@@ -13,7 +13,7 @@ Nafn: Steinar Eyþór Valsson
 * Er í 100% starfi hjá Símanum
 
 ## Eitthvað óvænt
-* ?
+* Sé svarthvítt
 
 ## Hvernig forritari er ég
-* Góð spurning, vissi ekki að það væru skilgreindar tegundir.
+* Bakenda - logic o.þ.h.
