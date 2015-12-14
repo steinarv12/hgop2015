@@ -8,13 +8,12 @@ describe('Make a move command', function() {
 			gameId:"1234",
 			event: "GameCreated",
 			name: "TheFirstGame",
-			userName: "Steinar",
+			user: {"userName": "Steinar", side: "X"},
 			timeStamp: "2015.12.02T11:29:44"
 		}, {
 			gameId:"1234",
 			event:"GameJoined",
-			userName: "Gunni",
-			otherUserName: "Steinar",
+			user: {"userName": "Gunni", side: "O"},
 			timeStamp: "2015.12.02T11:30:50"
 		}];
 	});
@@ -23,15 +22,15 @@ describe('Make a move command', function() {
 		when= {
 			gameId: "1234",
 			comm: "MakeMove",
-			userName: "Steinar",
-			place: [0, 0],
+			user: {"userName": "Steinar", side: "X"},
+			move: { xy: [0,0], side: "X" },
 			timeStamp: "2015.12.02T11:30:55"
 		};
 		then= [{
 			gameId: "1234",
 			event: "Set",
-			place: [0, 0],
-			userName: "Steinar",
+			move: { xy: [0,0], side: "X" },
+			user: {"userName": "Steinar", side: "X"},
 			timeStamp: "2015.12.02T11:30:55"
 		}];
 
@@ -46,22 +45,22 @@ describe('Make a move command', function() {
 		{
 			gameId: "1234",
 			event: "Set",
-			userName: "Steinar",
-			place: [0, 0],
+			user: {"userName": "Steinar", side: "X"},
+			move: { xy: [0,0], side: "X" },
 			timeStamp: "2015.12.02T11:30:55"
 		}]);
 		when = {
 			gameId: "1234",
 			comm: "MakeMove",
-			userName: "Steinar",
-			place: [0, 1],
+			user: {"userName": "Steinar", side: "X"},
+			move: { xy: [0,1], side: "X" },
 			timeStamp: "2015.12.02T11:30:55"
 		};
 		then= [{
 			gameId: "1234",
 			event: "IllegalMove",
-			place: [0, 1],
-			userName: "Steinar",
+			move: { xy: [0,1], side: "X" },
+			user: {"userName": "Steinar", side: "X"},
 			timeStamp: "2015.12.02T11:30:55"
 		}];
 
@@ -75,22 +74,22 @@ describe('Make a move command', function() {
 		{
 			gameId: "1234",
 			event: "Set",
-			userName: "Steinar",
-			place: [0, 0],
+			user: {"userName": "Steinar", side: "X"},
+			move: { xy: [0,0], side: "X" },
 			timeStamp: "2015.12.02T11:30:55"
 		}]);
 		when = {
 			gameId: "1234",
 			comm: "MakeMove",
-			userName: "Gunni",
-			place: [0, 0],
+			user: {"userName": "Gunni", side: "O"},
+			move: { xy: [0,0], side: "O" },
 			timeStamp: "2015.12.02T11:30:55"
 		};
 		then= [{
 			gameId: "1234",
 			event: "IllegalMove",
-			place: [0, 0],
-			userName: "Gunni",
+			move: { xy: [0,0], side: "O" },
+			user: {"userName": "Gunni", side: "O"},
 			timeStamp: "2015.12.02T11:30:55"
 		}];
 
@@ -105,43 +104,43 @@ describe('Make a move command', function() {
 		{
 			gameId: "1234",
 			event: "Set",
-			userName: "Steinar",
-			place: [0, 0],
+			user: {"userName": "Steinar", side: "X"},
+			move: { xy: [0,0], side: "X" },
 			timeStamp: "2015.12.02T11:30:55"
 		},
 		{
 			gameId: "1234",
 			event: "Set",
-			userName: "Gunni",
-			place: [1, 0],
+			user: {"userName": "Gunni", side: "O"},
+			move: { xy: [1.0], side: "O" },
 			timeStamp: "2015.12.02T11:30:55"
 		},
 		{
 			gameId: "1234",
 			event: "Set",
-			userName: "Steinar",
-			place: [0, 1],
+			user: {"userName": "Steinar", side: "X"},
+			move: { xy: [0, 1], side: "X" },
 			timeStamp: "2015.12.02T11:30:55"
 		},
 		{
 			gameId: "1234",
 			event: "Set",
-			userName: "Gunni",
-			place: [1, 1],
+			user: {"userName": "Gunni", side: "O"},
+			move: { xy: [1, 1], side: "O" },
 			timeStamp: "2015.12.02T11:30:55"
 		}]);
 		when= {
 			gameId: "1234",
 			comm: "MakeMove",
-			userName: "Steinar",
-			place: [0, 2],
+			user: {"userName": "Steinar", side: "X"},
+			move: { xy: [0, 2], side: "X" },
 			timeStamp: "2015.12.02T11:30:55"
 		};
 		then= [{
 			gameId: "1234",
-			event: "Won Steinar",
-			place: [0, 2],
-			userName: "Steinar",
+			event: "Won X",
+			move: { xy: [0, 2], side: "X" },
+			user: {"userName": "Steinar", side: "X"},
 			timeStamp: "2015.12.02T11:30:55"
 		}];
 
@@ -156,43 +155,43 @@ describe('Make a move command', function() {
 		{
 			gameId: "1234",
 			event:"Set",
-			userName: "Steinar",
-			place: [1, 0],
+			user: {"userName": "Steinar", side: "X"},
+			move: { xy: [1, 0], side: "X" },
 			timeStamp: "2015.12.02T11:30:55"
 		},
 		{
 			gameId: "1234",
 			event: "Set",
-			userName: "Gunni",
-			place: [0, 0],
+			user: {"userName": "Gunni", side: "O"},
+			move: { xy: [0, 0], side: "O" },
 			timeStamp: "2015.12.02T11:30:55"
 		},
 		{
 			gameId: "1234",
 			event:"Set",
-			userName: "Steinar",
-			place: [1, 1],
+			user: {"userName": "Steinar", side: "X"},
+			move: { xy: [1, 1], side: "X" },
 			timeStamp: "2015.12.02T11:30:55"
 		},
 		{
 			gameId: "1234",
 			event: "Set",
-			userName: "Gunni",
-			place: [0, 1],
+			user: {"userName": "Gunni", side: "O"},
+			move: { xy: [0, 1], side: "O" },
 			timeStamp: "2015.12.02T11:30:55"
 		}]);
 		when= {
 			gameId: "1234",
 			comm: "MakeMove",
-			userName: "Steinar",
-			place: [1, 2],
+			user: {"userName": "Steinar", side: "X"},
+			move: { xy: [1, 2], side: "X" },
 			timeStamp: "2015.12.02T11:30:55"
 		};
 		then= [{
 			gameId: "1234",
-			event: "Won Steinar",
-			place: [1, 2],
-			userName: "Steinar",
+			event: "Won X",
+			move: { xy: [1, 2], side: "X" },
+			user: {"userName": "Steinar", side: "X"},
 			timeStamp: "2015.12.02T11:30:55"
 		}];
 
@@ -207,43 +206,43 @@ describe('Make a move command', function() {
 		{
 			gameId: "1234",
 			event: "Set",
-			userName: "Steinar",
-			place: [0, 0],
+			user: {"userName": "Steinar", side: "X"},
+			move: { xy: [0, 0], side: "X" },
 			timeStamp: "2015.12.02T11:30:55"
 		},
 		{
 			gameId: "1234",
 			event: "Set",
-			userName: "Gunni",
-			place: [1, 0],
+			user: {"userName": "Gunni", side: "O"},
+			move: { xy: [1, 0], side: "O" },
 			timeStamp: "2015.12.02T11:30:55"
 		},
 		{
 			gameId: "1234",
 			event: "Set",
-			userName: "Steinar",
-			place: [1, 1],
+			user: {"userName": "Steinar", side: "X"},
+			move: { xy: [1, 1], side: "X" },
 			timeStamp: "2015.12.02T11:30:55"
 		},
 		{
 			gameId: "1234",
 			event: "Set",
-			userName: "Gunni",
-			place: [2, 0],
+			user: {"userName": "Gunni", side: "O"},
+			move: { xy: [2, 0], side: "O" },
 			timeStamp: "2015.12.02T11:30:55"
 		}]);
 		when= {
 			gameId: "1234",
 			comm: "MakeMove",
-			userName: "Steinar",
-			place: [2, 2],
+			user: {"userName": "Steinar", side: "X"},
+			move: { xy: [2, 2], side: "X" },
 			timeStamp: "2015.12.02T11:30:55"
 		};
 		then= [{
 			gameId: "1234",
-			event: "Won Steinar",
-			place: [2, 2],
-			userName: "Steinar",
+			event: "Won X",
+			move: { xy: [2, 2], side: "X" },
+			user: {"userName": "Steinar", side: "X"},
 			timeStamp: "2015.12.02T11:30:55"
 		}];
 
@@ -258,43 +257,43 @@ describe('Make a move command', function() {
 		{
 			gameId: "1234",
 			event: "Set",
-			userName: "Steinar",
-			place: [2, 0],
+			user: {"userName": "Steinar", side: "X"},
+			move: { xy: [2, 0], side: "X" } ,
 			timeStamp: "2015.12.02T11:30:55"
 		},
 		{
 			gameId: "1234",
 			event: "Set",
-			userName: "Gunni",
-			place: [1, 0],
+			user: {"userName": "Gunni", side: "O"},
+			move: { xy: [1, 0], side: "O" },
 			timeStamp: "2015.12.02T11:30:55"
 		},
 		{
 			gameId: "1234",
 			event: "Set",
-			userName: "Steinar",
-			place: [1, 1],
+			user: {"userName": "Steinar", side: "X"},
+			move: { xy: [1, 1], side: "X" },
 			timeStamp: "2015.12.02T11:30:55"
 		},
 		{
 			gameId: "1234",
 			event: "Set",
-			userName: "Gunni",
-			place: [2, 2],
+			user: {"userName": "Gunni", side: "O"},
+			move: { xy: [2, 2], side: "O" },
 			timeStamp: "2015.12.02T11:30:55"
 		}]);
 		when= {
 			gameId: "1234",
 			comm: "MakeMove",
-			userName: "Steinar",
-			place: [0, 2],
+			user: {"userName": "Steinar", side: "X"},
+			move: { xy: [0, 2], side: "X" },
 			timeStamp: "2015.12.02T11:30:55"
 		};
 		then= [{
 			gameId: "1234",
-			event: "Won Steinar",
-			place: [0, 2],
-			userName: "Steinar",
+			event: "Won X",
+			move: { xy: [0, 2], side: "X" },
+			user: {"userName": "Steinar", side: "X"},
 			timeStamp: "2015.12.02T11:30:55"
 		}];
 
@@ -308,52 +307,51 @@ describe('Make a move command', function() {
 		given= [{
 			gameId:"1234",
 			event:"GameCreated",
-			userName: "Steinar",
+			user: {"userName": "Steinar", side: "X"},
 			timeStamp: "2015.12.02T11:29:44"
 		},
 		{
 			gameId:"1234",
 			event:"GameJoined",
-			userName: "Gunni",
-			otherUserName: "Steinar",
+			user: {"userName": "Gunni", side: "O"},
 			timeStamp: "2015.12.02T11:30:50"
 		},
 		{
-			gameId: "1234", event: "Set", userName: "Steinar", place: [0, 0], timeStamp: "2015.12.02T11:30:55"
+			gameId: "1234", event: "Set", user: {"userName": "Steinar", side: "X"}, move: { xy: [0,0], side: "X" }, timeStamp: "2015.12.02T11:30:55"
 		},
 		{
-			gameId: "1234", event: "Set", userName: "Gunni", place: [0, 1], timeStamp: "2015.12.02T11:30:55"
+			gameId: "1234", event: "Set", user: {"userName": "Gunni", side: "O"}, move: { xy: [0,1], side: "O" }, timeStamp: "2015.12.02T11:30:55"
 		},
 		{
-			gameId: "1234", event: "Set", userName: "Steinar", place: [0, 2], timeStamp: "2015.12.02T11:30:55"
+			gameId: "1234", event: "Set", user: {"userName": "Steinar", side: "X"}, move: { xy: [0,2], side: "X" }, timeStamp: "2015.12.02T11:30:55"
 		},
 		{
-			gameId: "1234", event: "Set", userName: "Gunni", place: [1, 1], timeStamp: "2015.12.02T11:30:55"
+			gameId: "1234", event: "Set", user: {"userName": "Gunni", side: "O"}, move: { xy: [1,1], side: "O" }, timeStamp: "2015.12.02T11:30:55"
 		},
 		{
-			gameId: "1234", event: "Set", userName: "Steinar", place: [1, 0], timeStamp: "2015.12.02T11:30:55"
+			gameId: "1234", event: "Set", user: {"userName": "Steinar", side: "X"}, move: { xy: [1,0], side: "X" }, timeStamp: "2015.12.02T11:30:55"
 		},
 		{
-			gameId: "1234", event: "Set", userName: "Gunni", place: [2, 0], timeStamp: "2015.12.02T11:30:55"
+			gameId: "1234", event: "Set", user: {"userName": "Gunni", side: "O"}, move: { xy: [2,0], side: "O" }, timeStamp: "2015.12.02T11:30:55"
 		},
 		{
-			gameId: "1234", event: "Set", userName: "Steinar", place: [1, 2], timeStamp: "2015.12.02T11:30:55"
+			gameId: "1234", event: "Set", user: {"userName": "Steinar", side: "X"}, move: { xy: [1,2], side: "X" }, timeStamp: "2015.12.02T11:30:55"
 		},
 		{
-			gameId: "1234", event: "Set", userName: "Gunni", place: [2, 2], timeStamp: "2015.12.02T11:30:55"
+			gameId: "1234", event: "Set", user: {"userName": "Gunni", side: "O"}, move: { xy: [2,2], side: "O" }, timeStamp: "2015.12.02T11:30:55"
 		}];
 		when= {
 			gameId: "1234",
 			comm: "MakeMove",
-			userName: "Steinar",
-			place: [2, 1],
+			user: {"userName": "Steinar", side: "X"},
+			move: { xy: [2,1], side: "X" },
 			timeStamp: "2015.12.02T11:30:55"
 		};
 		then= [{
 			gameId: "1234",
 			event: "Draw",
-			place: [2, 1],
-			userName: "Steinar",
+			move: { xy: [2,1], side: "X" },
+			user: {"userName": "Steinar", side: "X"},
 			timeStamp: "2015.12.02T11:30:55"
 		}];
 

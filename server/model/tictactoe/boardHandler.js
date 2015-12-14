@@ -2,7 +2,6 @@ module.exports = function(){
     return {
 
         previousCmd: null,
-        previousMark: "O",
 
     	board:  [['','',''],
                  ['','',''],
@@ -10,15 +9,16 @@ module.exports = function(){
 
     	makeMove: function (cmd) {
             var event;
-            var row = parseInt(cmd.place[0]);
-            var col = parseInt(cmd.place[1]);
-            if (this.previousCmd !== null && this.previousCmd.userName === cmd.userName) {
+
+            var row = parseInt(cmd.move.xy[0]);
+            var col = parseInt(cmd.move.xy[1]);
+            if (this.previousCmd !== null && this.previousCmd.user.side === cmd.user.side) {
                 event = "IllegalMove";
             }
             else if (this.board[row][col] === "") {
-                this.board[row][col] = cmd.userName;
+                this.board[row][col] = cmd.move.side;
                 if (this.checkWin())
-                    event = "Won " + cmd.userName;
+                    event = "Won " + cmd.move.side;
                 else if (this.checkDraw())
                     event = "Draw";
                 else
@@ -31,8 +31,8 @@ module.exports = function(){
             return [{
                 gameId: cmd.gameId,
                 event: event,
-                place: cmd.place,
-                userName: cmd.userName,
+                move: cmd.move,
+                user: cmd.user,
                 timeStamp: cmd.timeStamp
             }];
         },

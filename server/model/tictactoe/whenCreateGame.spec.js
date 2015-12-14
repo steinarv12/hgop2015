@@ -9,7 +9,7 @@ describe('create game command', function(){
         when={
             gameId: "999",
             comm: "CreateGame",
-            userName : "Steinar",
+            user : {"userName": "Steinar", side: "X"},
             name: "TestGame",
             timeStamp: "2015.12.02T10:29:44"
         };
@@ -17,7 +17,7 @@ describe('create game command', function(){
             gameId: "999",
             event: "GameCreated",
             name: "TestGame",
-            userName: "Steinar",
+            user : {"userName": "Steinar", side: "X"},
             timeStamp: "2015.12.02T10:29:44"
         }];
 
@@ -29,17 +29,17 @@ describe('create game command', function(){
     it('should create game with another user another time',function(){
         given= [];
         when={
-            gameId: "999",
+            gameId: "998",
             comm: "CreateGame",
-            userName : "Gunni",
+            user : {"userName": "Gunni", side: "X"},
             name: "TestGame",
             timeStamp: "2015.12.02T10:29:44"
         };
         then=[{
-            gameId: "999",
+            gameId: "998",
             event: "GameCreated",
             name: "TestGame",
-            userName: "Gunni",
+            user : {"userName": "Gunni", side: "X"},
             timeStamp: "2015.12.02T10:29:44"
         }];
 

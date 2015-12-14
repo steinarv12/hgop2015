@@ -54,14 +54,6 @@ function given(action) {
             return givenAPI;
         },
         finish: function(done) {
-            /*
-            for (var i = 0; i < commands.length; i++) {
-                commands[i].gameId = expectEvent.id;
-                sendCommand(commands[i], function(cntr) {
-                    setTimeout(function () {}, 1000)
-                });
-            }
-            */
             function asyncLoop(iterations, func, callback) {
                 var index = 0;
                 var done = false;
@@ -96,7 +88,7 @@ function given(action) {
                 var lastEvent = actualEvents[actualEvents.length - 1];
 
                 should(lastEvent.event).eql(expectEvent.eventName);
-                should(lastEvent.userName).eql(expectEvent.userName);
+                should(lastEvent.user.userName).eql(expectEvent.userName);
                 should(lastEvent.gameId).eql(expectEvent.id);
                 done();
             }
@@ -143,14 +135,14 @@ function action(userName) {
             id: 1234,
             gameId: undefined,
             comm: undefined,
-            userName: undefined,
+            user: {'userName': undefined, side: undefined},
             place: undefined,
             name: undefined,
             timeStamp: "2014-12-02T11:29:29",
             path: undefined
         }
     }
-    commandAPI.cmd.userName = userName;
+    commandAPI.cmd.user.userName = userName;
     return commandAPI;
 }
 

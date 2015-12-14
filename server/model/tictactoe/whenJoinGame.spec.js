@@ -8,21 +8,20 @@ describe('join game command', function(){
 		given= [{
 			gameId:"1234",
 			event:"GameCreated",
-			userName: "Steinar",
+			user: {"userName": "Steinar", side: "X"},
 			timeStamp: "2015.12.02T11:29:44"
 		}];
 		when={
 			gameId:"1234",
 			comm:"JoinGame",
-			userName : "Gunni",
+			user: {"userName": "Gunni", side: "O"},
 			name:"TheFirstGame",
 			timeStamp: "2015.12.02T11:30:50"
 		};
 		then=[{
 			gameId:"1234",
 			event:"GameJoined",
-			userName: "Gunni",
-			otherUserName: "Steinar",
+			user: {"userName": "Gunni", side: "O"},
 			timeStamp: "2015.12.02T11:30:50"
 		}];
 
@@ -36,14 +35,14 @@ describe('join game command', function(){
 		when={
 			gameId:"1234",
 			comm:"JoinGame",
-			userName : "Gunni",
+			user: {"userName": "Gunni", side: "O"},
 			name:"TheFirstGame",
 			timeStamp: "2015.12.02T11:30:55"
 		};
 		then=[{
 			gameId:"1234",
 			event:"GameDoesNotExist",
-			userName: "Gunni",
+			user: {"userName": "Gunni", side: "O"},
 			timeStamp: "2015.12.02T11:30:55"
 		}];
 
