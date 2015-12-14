@@ -2,13 +2,15 @@
 
 SSHPATH=$1
 
+echo $2
 echo "SSH to Test machine..."
-ssh $SSHPATH '
+ssh $SSHPATH "
 docker stop tic
 docker rm tic
+echo $2
 docker pull steinarv12/tictactoe:$2
 docker run -p 9000:8080 -d --name="tic" -e "NODE_ENV=production" steinarv12/tictactoe:$2
-	'
+"
 
 rc=$?
 if [[ $rc != 0 ]] ; then
