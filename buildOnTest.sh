@@ -1,12 +1,6 @@
 #!/bin/bash
 
 SSHPATH=$1
-LATESTGIT=$2
-
-if [ $# -ne 1 ]; then
-    echo $0: usage: myscript sshpath
-    exit 1
-fi
 
 echo "SSH to Test machine..."
 ssh $SSHPATH '

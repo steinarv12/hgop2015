@@ -6,6 +6,7 @@ client/bower_components
 dist
 /server/config/local.env.js
 reports
-/server-tests*
+/server-tests
+/*tests.txt
 /acceptance-tests
 /load-tests
