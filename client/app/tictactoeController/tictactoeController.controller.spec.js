@@ -153,7 +153,7 @@ describe('Controller: TictactoeControllerCtrl', function () {
     expect(scope.myTurn()).toBe(false);
 
   });
-
+/*
   it('should refresh history once every one second', function () {
     getHistory();
 
@@ -177,6 +177,7 @@ describe('Controller: TictactoeControllerCtrl', function () {
 
     httpBackend.flush();
   });
+*/
 });
 
 
