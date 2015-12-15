@@ -85,14 +85,7 @@ function given(action) {
                 return loop;
             }
             function compareToActual(actualEvents) {
-                for (var i = 0; i < actualEvents.length; i++) {
-                    console.log(actualEvents[i]);
-                    if (typeof actualEvents[i].move != "undefined") {
-                        console.log("==========");
-                        console.log(actualEvents[i].move.xy, actualEvents[i].move.side);
-                        console.log("==========");
-                    }
-                };
+
                 var lastEvent = actualEvents[actualEvents.length - 1];
 
                 should(lastEvent.event).eql(expectEvent.eventName);
