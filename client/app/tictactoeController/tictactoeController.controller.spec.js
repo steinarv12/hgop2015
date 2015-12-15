@@ -84,7 +84,7 @@ describe('Controller: TictactoeControllerCtrl', function () {
       }
     }).respond([
       {
-        event: 'MovePlaced',
+        event: 'Set',
         user: {
           userName: 'Gummi'
         },
@@ -127,7 +127,7 @@ describe('Controller: TictactoeControllerCtrl', function () {
       }
     }).respond([
       {
-        event: 'MovePlaced',
+        event: 'Set',
         user: {
           userName: 'Gummi'
         },
