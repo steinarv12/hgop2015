@@ -21,7 +21,7 @@ angular.module('tictactoeApp')
             'GameJoined': function (event, gameState) {
               gameState.joiningUser = event.user;
             },
-            'MovePlaced': function (event, gameState) {
+            'Set': function (event, gameState) {
               var x = event.move.xy.x, y = event.move.xy.y;
               gameState.board[x][y] = event.move.side;
               gameState.nextTurn = event.move.side === 'X' ? 'O' : 'X';

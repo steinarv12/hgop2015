@@ -18,9 +18,9 @@ module.exports = function(){
             else if (this.board[row][col] === "") {
                 this.board[row][col] = cmd.move.side;
                 if (this.checkWin())
-                    event = "Won " + cmd.move.side;
+                    event = "GameWon";
                 else if (this.checkDraw())
-                    event = "Draw";
+                    event = "GameDraw";
                 else
                     event = "Set";
             }

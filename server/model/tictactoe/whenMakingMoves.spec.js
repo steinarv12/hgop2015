@@ -138,7 +138,7 @@ describe('Make a move command', function() {
 		};
 		then= [{
 			gameId: "1234",
-			event: "Won X",
+			event: "GameWon",
 			move: { xy: [0, 2], side: "X" },
 			user: {"userName": "Steinar", side: "X"},
 			timeStamp: "2015.12.02T11:30:55"
@@ -189,7 +189,7 @@ describe('Make a move command', function() {
 		};
 		then= [{
 			gameId: "1234",
-			event: "Won X",
+			event: "GameWon",
 			move: { xy: [1, 2], side: "X" },
 			user: {"userName": "Steinar", side: "X"},
 			timeStamp: "2015.12.02T11:30:55"
@@ -240,7 +240,7 @@ describe('Make a move command', function() {
 		};
 		then= [{
 			gameId: "1234",
-			event: "Won X",
+			event: "GameWon",
 			move: { xy: [2, 2], side: "X" },
 			user: {"userName": "Steinar", side: "X"},
 			timeStamp: "2015.12.02T11:30:55"
@@ -291,7 +291,7 @@ describe('Make a move command', function() {
 		};
 		then= [{
 			gameId: "1234",
-			event: "Won X",
+			event: "GameWon",
 			move: { xy: [0, 2], side: "X" },
 			user: {"userName": "Steinar", side: "X"},
 			timeStamp: "2015.12.02T11:30:55"
@@ -349,7 +349,7 @@ describe('Make a move command', function() {
 		};
 		then= [{
 			gameId: "1234",
-			event: "Draw",
+			event: "GameDraw",
 			move: { xy: [2,1], side: "X" },
 			user: {"userName": "Steinar", side: "X"},
 			timeStamp: "2015.12.02T11:30:55"
