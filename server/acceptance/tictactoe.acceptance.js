@@ -70,6 +70,6 @@ describe('TEST ENV GET /api/gameHistory', function () {
             .and(action("Steinar").placeAt(1,2,"X"))
             .and(action("Gunni").placeAt(2,2,"O"))
             .and(action("Steinar").placeAt(2,1,"X"))
-        .expect("Draw").byUser("Steinar").finish(done);
+        .expect("GameDraw").byUser("Steinar").finish(done);
     });
 });
