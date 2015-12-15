@@ -62,3 +62,19 @@ NodeJS keyrir á aðeins einum þræði en með asynchronous hætti. Þannig er 
 
 Þegar álagsprófunin er keyrð keyrir hún því serial frá okkar sjónarhorni þar sem aðeins ein fyrirspurn er tekin fyrir í einu. Þegar fyrirspurnirnar svo klárast er þeim svarað þegar að þeim kemur í biðröðinni.
 
+
+# Day 11 viðbót
+
+## What does this give us? Who would use the capability to track versions and why? Who would use capability to deploy any version and why?
+
+Að hafa þann möguleika að geta keyrt upp hvaða útgáfu sem er gefur okkur mikið öryggi gagnvart óvæntum villum, svo lengi sem við erum með mjög ört deployment og erum því ekki að rúlla til baka mikilvægum hlutum sem brjóta aðra hluti fyrir viðskiptavinum. Ef við byggjum nýja útgáfu oft og komumst svo að því að það er villa í útgáfu X getum við því auðveldlega skipt yfir í útgáfum Y sem er þá eldri en X.
+
+Þeir sem myndu nýta sér þetta væru þá þær sem sæju um Ops ferlið. Ef þeir sjá eða fá kvörtun um villu sem er nógu alvarleg til að rúlla þurfi útgáfu til baka í stað þess að taka sinn tíma að laga hana fyrst geta þeir a.m.k. haft virkandi útgáfu á meðan til að nota á meðan villan er löguð.
+
+## What was wrong with having docker push in the deployment script rather than in the dockerbuild.sh script?
+
+Dockerbuild.sh skriptan, eins og nafnið gefur til kynna, á að byggja docker image. Ef við höfum "push" partinn utan þess getum við ekki verið jafn viss á því að réttri útgáfu hafi verið ýtt áfram á docker þjóninn. Við höfum meiri yfirsýn og stjórn yfir þeim villum sem eiga sér stað inn í dockerbuild.sh og getum tekið ákvarðanir þaðan sem endurspegla betur hvað við viljum gera, push eða ekki o.s.frv. Við erum því ekki jafn viss á því hvort við séum örugglega með rétta útgáfu af docker myndinni ef við pushum utan þess.
+
+## How does the "deploy any version, anywhere" build feature work? Hint: Track GIT_COMMIT
+
+Git hashið af síðuta commiti er sett sem ID á docker image sem ýtt er áfram á docker þjóninn sem þýðir að við eigum ID sem endurspeglar hvaða Git commit hún á við. Þannig getum við einfaldlega kíkt á hvaða Git umhverfi sem við notum, flett upp á viðeigandi commiti, fundið hashið og náð í viðeigandi image eða deployað henni.
