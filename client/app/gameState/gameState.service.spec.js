@@ -46,7 +46,7 @@ describe('Factory: TictacToeState', function () {
   it('Should add moves 0,1 to game board', function () {
 
     gameState.mutate([{
-        event: 'MovePlaced',
+        event: 'Set',
         user: {
           userName: 'Gummi'
         },
@@ -66,7 +66,7 @@ describe('Factory: TictacToeState', function () {
   it('Should add move 2,2 to board.', function () {
 
     gameState.mutate([{
-        event: 'MovePlaced',
+        event: 'Set',
         user: {
           userName: 'Gummi'
         },
@@ -86,7 +86,7 @@ describe('Factory: TictacToeState', function () {
   it('Should mark nextTurn as opposite from last event.', function () {
     gameState.me = {side: 'O'};
     gameState.mutate([{
-        event: 'MovePlaced',
+        event: 'Set',
         user: {
           userName: 'Gummi'
         },
