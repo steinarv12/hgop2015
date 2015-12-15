@@ -4,7 +4,6 @@ angular.module('tictactoeApp')
   .controller('TictactoeController', function ($scope, $http, gameState, guid, $location, $interval) {
 
     $scope.gameState = gameState();
-    console.log($interval);
     var thenHandleEvents = function (postPromise) {
       postPromise.then(function (data) {
         $scope.gameState.mutate(data.data);
@@ -33,7 +32,7 @@ angular.module('tictactoeApp')
     }
 
     refresh();
-   // $interval(refresh, 2000);
+    $interval(refresh, 2000);
 
     function mySide() {
       return $location.search().gameSide;
@@ -49,7 +48,7 @@ angular.module('tictactoeApp')
       }
       thenHandleEvents($http.post('/api/placeMove/', {
           gameId: $scope.gameState.gameId,
-          comm: 'PlaceMove',
+          comm: 'MakeMove',
           user: $scope.me,
           timeStamp: '2014-12-02T11:29:29',
           move: {
