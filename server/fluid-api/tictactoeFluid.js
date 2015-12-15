@@ -85,6 +85,14 @@ function given(action) {
                 return loop;
             }
             function compareToActual(actualEvents) {
+                for (var i = 0; i < actualEvents.length; i++) {
+                    console.log(actualEvents[i]);
+                    if (typeof actualEvents[i].move != "undefined") {
+                        console.log("==========");
+                        console.log(actualEvents[i].move.xy, actualEvents[i].move.side);
+                        console.log("==========");
+                    }
+                };
                 var lastEvent = actualEvents[actualEvents.length - 1];
 
                 should(lastEvent.event).eql(expectEvent.eventName);
@@ -113,22 +121,25 @@ function action(userName) {
             this.cmd.name = gameName;
             this.cmd.comm = "CreateGame";
             this.cmd.path = "/api/createGame"
+            this.cmd.user.side = "X";
             return commandAPI;
         },
         withName: function(nameOfGame) {
             this.cmd.name = nameOfGame;
             return commandAPI;
         },
-        placeAt: function(row, col) {
-            this.cmd.place = [row, col];
+        placeAt: function(row, col, side) {
+            this.cmd.move.xy = [row, col];
             this.cmd.comm = "MakeMove";
             this.cmd.path = "/api/placeMove"
+            this.cmd.move.side = side;
             return commandAPI;
         },
         joinGame: function(gameName) {
             this.cmd.comm = "JoinGame";
             this.cmd.name = gameName;
-            this.cmd.path = "/api/joinGame"
+            this.cmd.path = "/api/joinGame";
+            this.cmd.user.side = "O";
             return commandAPI;
         },
         cmd: {
@@ -136,7 +147,7 @@ function action(userName) {
             gameId: undefined,
             comm: undefined,
             user: {'userName': undefined, side: undefined},
-            place: undefined,
+            move: {'xy': undefined, 'side': undefined},
             name: undefined,
             timeStamp: "2014-12-02T11:29:29",
             path: undefined

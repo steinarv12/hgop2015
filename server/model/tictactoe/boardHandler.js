@@ -12,7 +12,7 @@ module.exports = function(){
 
             var row = parseInt(cmd.move.xy[0]);
             var col = parseInt(cmd.move.xy[1]);
-            if (this.previousCmd !== null && this.previousCmd.user.side === cmd.user.side) {
+            if (this.previousCmd !== null && this.previousCmd.move.side === cmd.move.side) {
                 event = "IllegalMove";
             }
             else if (this.board[row][col] === "") {
