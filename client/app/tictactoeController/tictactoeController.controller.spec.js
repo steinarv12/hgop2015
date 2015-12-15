@@ -79,7 +79,7 @@ describe('Controller: TictactoeControllerCtrl', function () {
       },
       timeStamp: '2014-12-02T11:29:29',
       move: {
-        xy:{x:2, y:0},
+        xy: [2,0],
         side: 'X'
       }
     }).respond([
@@ -90,7 +90,7 @@ describe('Controller: TictactoeControllerCtrl', function () {
         },
         timeStamp: '2014-12-02T11:29:29',
         move: {
-          xy:{x:2, y:0},
+          xy: [2,0],
           side: 'X'
         }
       }
@@ -103,7 +103,7 @@ describe('Controller: TictactoeControllerCtrl', function () {
     scope.me = {userName: 'Gummi'};
     scope.gameState.gameId = '87687';
 
-    scope.placeMove({x:2, y:0});
+    scope.placeMove([2,0]);
     httpBackend.flush();
 
     expect(scope.myTurn()).toBe(false);
@@ -122,7 +122,7 @@ describe('Controller: TictactoeControllerCtrl', function () {
       },
       timeStamp: '2014-12-02T11:29:29',
       move: {
-        xy:{x:2, y:1},
+        xy: [2,1],
         side: 'O'
       }
     }).respond([
@@ -133,7 +133,7 @@ describe('Controller: TictactoeControllerCtrl', function () {
         },
         timeStamp: '2014-12-02T11:29:29',
         move: {
-          xy:{x:2, y:1},
+          xy: [2,1],
           side: 'O'
         }
       }
@@ -147,7 +147,7 @@ describe('Controller: TictactoeControllerCtrl', function () {
     scope.me = {userName: 'Gummi'};
     scope.gameState.gameId = '87687';
 
-    scope.placeMove({x:2, y:1});
+    scope.placeMove([2,1]);
     httpBackend.flush();
 
     expect(scope.myTurn()).toBe(false);

@@ -53,7 +53,7 @@ describe('Factory: TictacToeState', function () {
         name: 'TheFirstGame',
         timeStamp: '2014-12-02T11:29:29',
         move: {
-          xy:{x:0, y:1},
+          xy: [0,1],
           side: 'X'
         }
       }]
@@ -73,7 +73,7 @@ describe('Factory: TictacToeState', function () {
         name: 'TheFirstGame',
         timeStamp: '2014-12-02T11:29:29',
         move: {
-          xy:{x:2, y:2},
+          xy: [2,2],
           side: 'X'
         }
       }]
@@ -93,7 +93,7 @@ describe('Factory: TictacToeState', function () {
         name: 'TheFirstGame',
         timeStamp: '2014-12-02T11:29:29',
         move: {
-          xy:{x:2, y:2},
+          xy: [2,2],
           side: 'X'
         }
       }]
