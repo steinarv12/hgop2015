@@ -73,7 +73,7 @@ describe('Controller: TictactoeControllerCtrl', function () {
     getHistory();
     httpBackend.expectPOST('/api/placeMove/', {
       gameId: '87687',
-      comm: 'PlaceMove',
+      comm: 'MakeMove',
       user: {
         userName: 'Gummi'
       },
@@ -116,7 +116,7 @@ describe('Controller: TictactoeControllerCtrl', function () {
     getHistory();
     httpBackend.expectPOST('/api/placeMove/', {
       gameId: '87687',
-      comm: 'PlaceMove',
+      comm: 'MakeMove',
       user: {
         userName: 'Gummi'
       },
