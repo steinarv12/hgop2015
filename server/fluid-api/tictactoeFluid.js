@@ -33,15 +33,12 @@ function given(action) {
         userName: undefined,
         id: undefined
     }
-    var expectedEvents = [];
     var commands = [];
     commands.push(action.cmd);
-    expectedEvents.push(buildExpectedEvent(action.cmd));
 
     var givenAPI = {
         and: function(action) {
             commands.push(action.cmd);
-            expectedEvents.push(buildExpectedEvent(action.cmd));
             return givenAPI;
         },
         expect: function(eventName) {
@@ -94,7 +91,6 @@ function given(action) {
                 should(lastEvent.event).eql(expectEvent.eventName);
                 should(lastEvent.user.userName).eql(expectEvent.userName);
                 should(lastEvent.gameId).eql(expectEvent.id);
-                should(actualEvents).eql(expectedEvents);
                 done();
             }
             function compareAsync() {
@@ -112,41 +108,12 @@ function given(action) {
     return givenAPI;
 }
 
-function buildExpectedEvent(cmd) {
-    if (cmd.comm === "CreateGame") {
-        return {
-            gameId: cmd.gameId,
-            event: "GameCreated",
-            name: cmd.name,
-            user: cmd.user,
-            timeStamp: cmd.timeStamp
-        }
-    }
-    else if (cmd.comm === "MakeMove") {
-        return {
-            gameId: cmd.gameId,
-            event: "Set",
-            move: cmd.move,
-            user: cmd.user,
-            timeStamp: cmd.timeStamp
-        }
-    }
-    else if (cmd.comm === "JoinGame") {
-        return {
-            gameId: cmd.gameId,
-            event: "GameJoined",
-            user: cmd.user,
-            timeStamp: cmd.timeStamp
-        }
-    }
-}
-
 function action(userName) {
     var commandAPI = {
         createGame: function(gameName) {
             this.cmd.name = gameName;
             this.cmd.comm = "CreateGame";
-            this.path = "/api/createGame"
+            this.cmd.path = "/api/createGame"
             this.cmd.user.side = "X";
             return commandAPI;
         },
@@ -157,26 +124,27 @@ function action(userName) {
         placeAt: function(row, col, side) {
             this.cmd.move.xy = [row, col];
             this.cmd.comm = "MakeMove";
-            this.path = "/api/placeMove"
+            this.cmd.path = "/api/placeMove"
             this.cmd.move.side = side;
             return commandAPI;
         },
         joinGame: function(gameName) {
             this.cmd.comm = "JoinGame";
             this.cmd.name = gameName;
-            this.path = "/api/joinGame";
+            this.cmd.path = "/api/joinGame";
             this.cmd.user.side = "O";
             return commandAPI;
         },
         cmd: {
+            id: 1234,
             gameId: undefined,
             comm: undefined,
             user: {'userName': undefined, side: undefined},
             move: {'xy': undefined, 'side': undefined},
             name: undefined,
             timeStamp: "2014-12-02T11:29:29",
-        },
-        path: undefined
+            path: undefined
+        }
     }
     commandAPI.cmd.user.userName = userName;
     return commandAPI;
