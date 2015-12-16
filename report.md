@@ -71,6 +71,8 @@ Að hafa þann möguleika að geta keyrt upp hvaða útgáfu sem er gefur okkur 
 
 Þeir sem myndu nýta sér þetta væru þá þær sem sæju um Ops ferlið. Ef þeir sjá eða fá kvörtun um villu sem er nógu alvarleg til að rúlla þurfi útgáfu til baka í stað þess að taka sinn tíma að laga hana fyrst geta þeir a.m.k. haft virkandi útgáfu á meðan til að nota á meðan villan er löguð.
 
+Þeir sem sjá um að prófa hugbúnaðinn hafa einnig mikið gagn af því að geta skipt á milli útgáfa. Hver var munurinn? Hvað hætti að virka? Hvernig breyttist þessi virkni? O.fl. spurningar sem gætu komið upp.
+
 ## What was wrong with having docker push in the deployment script rather than in the dockerbuild.sh script?
 
 Dockerbuild.sh skriptan, eins og nafnið gefur til kynna, á að byggja docker image. Ef við höfum "push" partinn utan þess getum við ekki verið jafn viss á því að réttri útgáfu hafi verið ýtt áfram á docker þjóninn. Við höfum meiri yfirsýn og stjórn yfir þeim villum sem eiga sér stað inn í dockerbuild.sh og getum tekið ákvarðanir þaðan sem endurspegla betur hvað við viljum gera, push eða ekki o.s.frv. Við erum því ekki jafn viss á því hvort við séum örugglega með rétta útgáfu af docker myndinni ef við pushum utan þess.
