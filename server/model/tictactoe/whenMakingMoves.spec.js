@@ -138,6 +138,13 @@ describe('Make a move command', function() {
 		};
 		then= [{
 			gameId: "1234",
+			event: "Set",
+			move: { xy: [0, 2], side: "X" },
+			user: {"userName": "Steinar", side: "X"},
+			timeStamp: "2015.12.02T11:30:55"
+			},
+			{
+			gameId: "1234",
 			event: "GameWon",
 			move: { xy: [0, 2], side: "X" },
 			user: {"userName": "Steinar", side: "X"},
@@ -188,12 +195,19 @@ describe('Make a move command', function() {
 			timeStamp: "2015.12.02T11:30:55"
 		};
 		then= [{
-			gameId: "1234",
-			event: "GameWon",
-			move: { xy: [1, 2], side: "X" },
-			user: {"userName": "Steinar", side: "X"},
-			timeStamp: "2015.12.02T11:30:55"
-		}];
+				gameId: "1234",
+				event: "Set",
+				move: { xy: [1, 2], side: "X" },
+				user: {"userName": "Steinar", side: "X"},
+				timeStamp: "2015.12.02T11:30:55"
+			},
+			{
+				gameId: "1234",
+				event: "GameWon",
+				move: { xy: [1, 2], side: "X" },
+				user: {"userName": "Steinar", side: "X"},
+				timeStamp: "2015.12.02T11:30:55"
+			}];
 
 		var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
 
@@ -239,6 +253,13 @@ describe('Make a move command', function() {
 			timeStamp: "2015.12.02T11:30:55"
 		};
 		then= [{
+			gameId: "1234",
+			event: "Set",
+			move: { xy: [2, 2], side: "X" },
+			user: {"userName": "Steinar", side: "X"},
+			timeStamp: "2015.12.02T11:30:55"
+		},
+		{
 			gameId: "1234",
 			event: "GameWon",
 			move: { xy: [2, 2], side: "X" },
@@ -290,6 +311,13 @@ describe('Make a move command', function() {
 			timeStamp: "2015.12.02T11:30:55"
 		};
 		then= [{
+			gameId: "1234",
+			event: "Set",
+			move: { xy: [0, 2], side: "X" },
+			user: {"userName": "Steinar", side: "X"},
+			timeStamp: "2015.12.02T11:30:55"
+		},
+		{
 			gameId: "1234",
 			event: "GameWon",
 			move: { xy: [0, 2], side: "X" },
@@ -348,6 +376,13 @@ describe('Make a move command', function() {
 			timeStamp: "2015.12.02T11:30:55"
 		};
 		then= [{
+			gameId: "1234",
+			event: "Set",
+			move: { xy: [2,1], side: "X" },
+			user: {"userName": "Steinar", side: "X"},
+			timeStamp: "2015.12.02T11:30:55"
+		},
+		{
 			gameId: "1234",
 			event: "GameDraw",
 			move: { xy: [2,1], side: "X" },
