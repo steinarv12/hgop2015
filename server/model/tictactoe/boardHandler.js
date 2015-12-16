@@ -28,13 +28,30 @@ module.exports = function(){
                 event = "IllegalMove";
             }
             this.previousCmd = cmd;
-            return [{
-                gameId: cmd.gameId,
-                event: event,
-                move: cmd.move,
-                user: cmd.user,
-                timeStamp: cmd.timeStamp
-            }];
+            if (event === "GameDraw" || event === "GameWon") {
+                return [{
+                    gameId: cmd.gameId,
+                    event: "Set",
+                    move: cmd.move,
+                    user: cmd.user,
+                    timeStamp: cmd.timeStamp
+                },
+                {
+                    gameId: cmd.gameId,
+                    event: event,
+                    move: cmd.move,
+                    user: cmd.user,
+                    timeStamp: cmd.timeStamp
+                }];
+            } else {
+                return [{
+                    gameId: cmd.gameId,
+                    event: event,
+                    move: cmd.move,
+                    user: cmd.user,
+                    timeStamp: cmd.timeStamp
+                }];
+            }
         },
 
 
